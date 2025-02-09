@@ -1,11 +1,12 @@
+import os
 from fastapi import FastAPI, Request
 from github import Github, Auth
-from dotenv import dotenv_values
+from dotenv import load_dotenv
 
 app = FastAPI()
 
-config = dotenv_values(".env")
-auth = Auth.Token(config['GH_TOKEN'])
+load_dotenv()
+auth = Auth.Token(os.environ.get('GH_TOKEN'))
 
 
 @app.post("/webhook")
